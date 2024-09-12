@@ -14,6 +14,8 @@ The script will decline all updates from the following categories/types:
 - updates for x86
 - updates for all Windows 10 versions before 22H2
 
+You will need to run the script from an account with admin rights on the WSUS server.
+
 # Parameters
 ## AutoDecline
 Decline WSUS updates that are preview, beta, superseded, language packs, drivers. Decline all updates for ARM and x86 architectures.
