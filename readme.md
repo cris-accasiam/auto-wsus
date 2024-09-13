@@ -24,11 +24,16 @@ Any update meant for a Windows 10 version before 22H2 will also be declined.
 ## AutoApprove
 Approve all updates that have not been approved or declined, for the target group "All Computers".
 
-## AutoDelete
+## DeleteDeclined
 Delete from WSUS all updates that are marked as declined.
 
 ## WsusSync
-Start the sync process on the WSUS server. This parameter takes precedence over the others, meaning that the script will first start the sync and wait for it to finish before performing any other operation.
+Start the sync process on the WSUS server. This parameter takes precedence over the others, except cleanup. If both WsusCleanup and WsusSync are selected, the script will first perform a cleanup and then sync.
+The script will wait until the sync is completed, then process the other operations, if any.
+
+## WsusCleanup
+Start the cleanup process on the WSUS server. This parameter takes precedence over all others. If both WsusCleanup and WsusSync are selected, the script will first perform a cleanup and then sync.
+The script will wait until the cleanup is completed, then process the other operations, if any.
 
 ## Server
 The WSUS server to connect to. Deafult is localhost.
@@ -48,7 +53,13 @@ Auto-WSUSUpdates.ps1 -WsusSync -AutoDecline -AutoApprove
 Trigger a sync and wait for it to complete. Afterwards, decline all updates that are not needed, and approve the remaining ones.
 
 ```powershell
-Auto-WSUSUpdates.ps1 -AutoDecline -AutoDelete
+Auto-WSUSUpdates.ps1 -AutoDecline -DeleteDeclined
 ```
 
 Decline all updates that match the categories listed above, and delete them from the server.
+
+```powershell
+Auto-WSUSUpdates.ps1 -DeclineAll -DeleteDeclined
+```
+
+Mark all updates as declined, then delete them. This will remove all updates from the server.
