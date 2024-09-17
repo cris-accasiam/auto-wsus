@@ -228,10 +228,10 @@ if ($autoApprove) {
     $approvalGroups = $WsusServer.GetComputerTargetGroups()
     $approvalGroup = $approvalGroups[0]
     foreach ($update in $allUpdates) {
-        $update.Approve([Microsoft.UpdateServices.Administration.UpdateApprovalAction]::Install, $approvalGroup)
-        $update.Refresh()
+        $update.Approve([Microsoft.UpdateServices.Administration.UpdateApprovalAction]::Install, $approvalGroup) | Out-Null
+        $update.Refresh() | Out-Null
     }
-    Write-Host ($allUpdates.count + " updates approved.")
+    Write-Host ('' + $allUpdates.count + " updates approved.")
 }
 
 
