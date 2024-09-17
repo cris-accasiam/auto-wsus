@@ -169,7 +169,8 @@ if ($AutoDecline -or $DeclineAll) {
         }
     
         # Decline updates for x86
-        if ($update.Title -match "x86-based") {
+        # The title can contain either 'x86-based' or 'x86 based' text
+        if ($update.Title -like "*x86?based*") {
             $update.Decline()
             $declinedCount = $declinedCount + 1
             continue
