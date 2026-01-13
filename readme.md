@@ -12,14 +12,15 @@ The script will decline all updates from the following categories/types:
 - drivers
 - updates for ARM
 - updates for x86
-- updates for all Windows 10 versions before 22H2
+- updates for all Windows 10
+- updates for all Windows 11 versions before 24H2
 
 You will need to run the script from an account with admin rights on the WSUS server.
 
 # Parameters
 ## AutoDecline
 Decline WSUS updates that are preview, beta, superseded, language packs, drivers. Decline all updates for ARM and x86 architectures.
-Any update meant for a Windows 10 version before 22H2 will also be declined.
+Any update meant for a Windows 11 version before 24H2 will also be declined.
 
 ## AutoApprove
 Approve all updates that have not been approved or declined, for the target group "All Computers".
@@ -45,6 +46,12 @@ If SSL is needed to connect to the WSUS server. Default is False.
 The port number used by WSUS. Default is 8530.
 
 # Examples
+
+```powershell
+Auto-WSUSUpdates.ps1 -WsusSync -WsusCleanup
+```
+
+Start the WSUS cleanup and wait for it to complete. Afterwards, start the sync.
 
 ```powershell
 Auto-WSUSUpdates.ps1 -WsusSync -AutoDecline -AutoApprove
