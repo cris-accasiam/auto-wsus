@@ -70,11 +70,15 @@ Param(
     [switch]$WsusCleanup
 )
 
+# Windows versions that are not needed
 $versions = @(
     'Windows 10 Version 1507',
     'Windows 10 Version 1607',
     'Windows 10 Version 1809',
-    'Windows 10 Version 21H2'
+    'Windows 10 Version 21H2',
+    'Windows 10 Version 22H2',
+    'Windows 11 Version 22H2',
+    'Windows 11 Version 23H2'
 )
 try {
     [reflection.assembly]::LoadWithPartialName("Microsoft.UpdateServices.Administration") | out-null    
@@ -176,7 +180,7 @@ if ($AutoDecline -or $DeclineAll) {
             continue
         }
     
-        # Decline updates for old versions of Windows 10    
+        # Decline updates for old versions of Windows 10/11    
         $declined = $false
         foreach ($v in $versions) {
             if ($update.Title -match $v) {
